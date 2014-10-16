@@ -1,0 +1,75 @@
+#ifndef MATRIX1_HPP
+#define MATRIX1_HPP
+
+#include <vector> 
+#include <iostream>
+
+using namespace std;
+
+class Matrix
+{
+public:
+    Matrix(unsigned long int rows,unsigned long int cols):r(rows),c(cols){}    
+    virtual ~Matrix();
+    unsigned long int rows() const {return r;}
+    unsigned long int cols() const {return c;}  
+    void setRows(unsigned long int rnum){r = rnum;}
+    void setCols(unsigned long int cnum){c = cnum;}    
+    
+private:
+    unsigned long int r,c;//the number of rows and columns in the matrix        
+};
+
+class FloatMatrix:public Matrix
+{
+public:
+    FloatMatrix(unsigned long int rows,unsigned long int cols);
+    FloatMatrix(const FloatMatrix &);
+    FloatMatrix(const vector<float> &,unsigned long int rows,unsigned long int cols);
+    virtual ~FloatMatrix();
+    friend ostream & operator<<(ostream &, const FloatMatrix &);
+    friend FloatMatrix operator+(const FloatMatrix &,const FloatMatrix &);
+    FloatMatrix & operator+=(const FloatMatrix &);
+    friend FloatMatrix operator-(const FloatMatrix &,const FloatMatrix &);
+    FloatMatrix & operator-=(const FloatMatrix &);
+    FloatMatrix & operator*(float);
+    FloatMatrix & operator*=(float);
+    friend FloatMatrix operator*(const FloatMatrix &,const FloatMatrix &);
+    FloatMatrix & operator*=(const FloatMatrix &);
+    FloatMatrix & operator=(const FloatMatrix &);    
+    friend bool operator==(const FloatMatrix &,const FloatMatrix &);
+    float & operator()(unsigned long int,unsigned long int);
+    float operator()(unsigned long int,unsigned long int) const;
+    void LUDecompose();
+    void LUBackSubstitute(vector<float> &);
+    FloatMatrix inverse();    
+    float det();
+    float maxcolsum_Norm();
+    float Euclidean_Norm();
+    float maxrowsum_Norm();
+    
+    const vector<float> & contents() const {return matrix;}
+    vector<float> & contents(){return matrix;}
+
+private:
+    //vector< vector<float> > matrix;//storage for the matrix contents.    
+    vector<float> matrix;//storage for the matrix contents.    
+    vector<unsigned int> row_perm;//contains the new row placement after LUDecompose() is called
+    float d;//used by LUDecompose() - +ve for even number of row interchages, -ve for odd number
+};
+
+FloatMatrix identity(const FloatMatrix &);
+FloatMatrix transpose(const FloatMatrix &);
+float trace(const FloatMatrix &);
+
+//this preserves the original matrices (returns solution vector)
+FloatMatrix GaussElimLinearSolve(const FloatMatrix &, const FloatMatrix &);
+
+//this doesn't - second FloatMatrix & replaced with solution vector
+void GaussElimLinearSolve(FloatMatrix &,FloatMatrix &,FloatMatrix &);
+
+vector<float> tridag(const vector<float> &, const vector<float>&,const vector<float> &, const vector<float> &);
+
+//ostream & operator<<(ostream &, const Matrix &);
+
+#endif

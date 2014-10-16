@@ -1,0 +1,103 @@
+#script header ====================================================
+# file name      :=    flopcb.jam
+# dated          :=    06Nov02
+# version number :=
+# document ref.  :=    DEV000000
+# author         :=    Martin
+#
+# VERSION 4 software
+# Copyright (c) 1988,2002 Flomerics Limited . All rights reserved
+#script header ====================================================
+
+EXENAME = flopcb ;
+
+LOCATE_TARGET ?= $(DEVBIN) ;
+
+# Setup platform Independant Flags
+#CCFLAGS += -DFLEX $(FLOCFLAGS) -DUSE_ND $(MCAD_FILES) -DQT_DLL -DQT_THREAD_SUPPORT
+CCFLAGS += $(FLOCFLAGS) -DQT_DLL -DQT_THREAD_SUPPORT ;
+
+if $(PURIFY_BUILD)
+{
+    CCFLAGS += -DNO_FLEX ;
+}
+
+# Set platform specific flags here
+switch $(OS)
+{
+  case NT :
+    CCFLAGS += /GX /GR  ;
+    LINKFLAGS += $(LINK_GUI) ;
+}
+
+#  Make C++ use the same Flags as C
+C++FLAGS += $(CCFLAGS) ;
+
+# Setup link flags here (may need some of the symbols listed)
+LINKLIBS += $(FLEX_LIB) ;
+
+if $(UNIX)
+{
+LINKLIBS += -L$(DEVLIB) -lpdml -lzf -L$(DEVLIB) -lflocore -lflothr -lflocomm ;
+LINKLIBS += -lGL -lGLU ;
+}
+else
+{
+LINKLIBS += $(DEVLIB)\\libzf.lib $(DEVLIB)\\libpdml.lib $(DEVLIB)/libflocore.lib $(DEVLIB)/libflothr.lib $(DEVLIB)/libflocomm.lib ;
+}
+LINKLIBS += $(QTLIBS) ;
+
+# Define where the headers are
+#HDRS += $(DEVINC) $(ND_INC) $(QTDIR)/include ;
+HDRS += $(DEVINC) $(ZLIB_INC) $(ND_INC) $(flopcbsrc) $(QTDIR)/include ;
+
+Files = 
+$(flopcbsrc)/QtGUI/main.cpp
+;
+
+# Program source dependancies
+Main $(EXENAME) : $(Files) ;
+
+# Program Library dependancies
+LinkLibraries $(EXENAME) :
+
+
+$(DEVLIB)/libQtGUI$(LIBSUFFIX)
+$(DEVLIB)/libProjectCompare$(LIBSUFFIX)
+$(DEVLIB)/libDialogs$(LIBSUFFIX)
+$(DEVLIB)/libPropSheet$(LIBSUFFIX)
+$(DEVLIB)/libView3D$(LIBSUFFIX)
+$(DEVLIB)/libView2D$(LIBSUFFIX)
+$(DEVLIB)/libSolution$(LIBSUFFIX)
+$(DEVLIB)/libStorage$(LIBSUFFIX)
+$(DEVLIB)/libPCBModel$(LIBSUFFIX)
+$(DEVLIB)/libProjectModel$(LIBSUFFIX)
+
+$(DEVLIB)/libProject$(LIBSUFFIX)
+$(DEVLIB)/libGO$(LIBSUFFIX)
+$(DEVLIB)/libPrjCls$(LIBSUFFIX)
+$(DEVLIB)/libGeom$(LIBSUFFIX)
+
+$(DEVLIB)/libTranL$(LIBSUFFIX)
+$(DEVLIB)/libExtB$(LIBSUFFIX)
+$(DEVLIB)/libCells$(LIBSUFFIX)
+$(DEVLIB)/libpdata$(LIBSUFFIX)
+$(DEVLIB)/libpsol$(LIBSUFFIX)
+$(DEVLIB)/libGrid$(LIBSUFFIX)
+$(DEVLIB)/libZones$(LIBSUFFIX)
+$(DEVLIB)/libZA$(LIBSUFFIX)
+
+$(DEVLIB)/libnewsa$(NLIBSUFFIX)
+$(DEVLIB)/libfilter$(LIBSUFFIX)
+$(DEVLIB)/libflobase$(LIBSUFFIX)
+$(DEVLIB)/libflocont$(LIBSUFFIX)
+$(DEVLIB)/libfloflex$(LIBSUFFIX)
+
+$(DEVLIB)/libLibraryManager$(LIBSUFFIX)
+
+$(DEVLIB)/libProxyCommon$(LIBSUFFIX)
+
+$(DEVLIB)/libProp$(LIBSUFFIX)
+$(DEVLIB)/libTrans$(LIBSUFFIX)
+$(DEVLIB)/libUtil$(LIBSUFFIX)
+;

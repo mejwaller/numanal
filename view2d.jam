@@ -1,0 +1,74 @@
+#
+# VERSION 4 software
+# Copyright (c) 1988,2002 Flomerics Limited . All rights reserved
+#script header ====================================================
+
+LIBNAME = libView2D ;
+
+LOCATE_TARGET ?= $(DEVLIB) ;
+
+# Setup platform Independant Flags
+CCFLAGS += $(FLOCFLAGS) ;
+
+switch $(OS)
+{
+  case NT :
+    CCFLAGS += /GX /GR  ;
+}
+
+#  Make C++ use the same Flags as C
+C++FLAGS += $(CCFLAGS) ;
+
+
+
+LINKLIBS += $(QTDIR)/lib/WinNT\\qtmain.lib $(QTDIR)/lib/WinNT\\qt-mt321.lib opengl32.lib glu32.lib ;
+
+# Define where the headers are
+HDRS +=  $(flopcbsrc) $(DEVSRC) $(DEVINC) $(QTDIR)/include ;
+
+Files +=
+$(flopcbsrc)/QtGUI/View2DView.cpp
+$(flopcbsrc)/QtGUI/View2DController.cpp
+$(flopcbsrc)/QtGUI/moc_View2DController.cpp
+$(flopcbsrc)/QtGUI/View2DCanvas.cpp
+$(flopcbsrc)/QtGUI/Canvas2DToolTip.cpp
+$(flopcbsrc)/QtGUI/Env2DView.cpp
+$(flopcbsrc)/QtGUI/Env2DController.cpp
+$(flopcbsrc)/QtGUI/moc_Env2DController.cpp
+$(flopcbsrc)/QtGUI/Env2DCanvas.cpp
+$(flopcbsrc)/QtGUI/View2DPaletteView.cpp
+$(flopcbsrc)/QtGUI/View2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_View2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/Env2DPaletteView.cpp
+$(flopcbsrc)/QtGUI/Env2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_Env2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/ShapePainter.cpp
+$(flopcbsrc)/QtGUI/Results2DView.cpp
+$(flopcbsrc)/QtGUI/Results2DController.cpp
+$(flopcbsrc)/QtGUI/moc_Results2DController.cpp
+$(flopcbsrc)/QtGUI/Results2DCanvas.cpp
+$(flopcbsrc)/QtGUI/Results2DPaletteView.cpp
+$(flopcbsrc)/QtGUI/Results2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_Results2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/ViewOptions.cpp
+$(flopcbsrc)/QtGUI/View2DScroller.cpp
+$(flopcbsrc)/QtGUI/moc_View2DScroller.cpp
+$(flopcbsrc)/QtGUI/Layout2DView.cpp
+$(flopcbsrc)/QtGUI/Layout2DController.cpp
+$(flopcbsrc)/QtGUI/moc_Layout2DController.cpp
+$(flopcbsrc)/QtGUI/Layout2DCanvas.cpp
+$(flopcbsrc)/QtGUI/Layout2DPaletteView.cpp
+$(flopcbsrc)/QtGUI/Layout2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_Layout2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/Base2DPaletteView.cpp
+$(flopcbsrc)/QtGUI/Base2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_Base2DPaletteController.cpp
+$(flopcbsrc)/QtGUI/RulerWidget.cpp
+$(flopcbsrc)/QtGUI/RulerData.cpp
+$(flopcbsrc)/QtGUI/LegendWidget.cpp
+$(flopcbsrc)/QtGUI/BoardShapeGenerator.cpp
+$(flopcbsrc)/QtGUI/EnvShapeGenerator.cpp
+$(flopcbsrc)/QtGUI/ResultsShapeGenerator.cpp
+;
+
+TemplateLibrary $(LIBNAME)$(NLIBSUFFIX) : $(Files) ;

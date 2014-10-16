@@ -1,0 +1,46 @@
+#script header ====================================================
+# file name      :=    hello_world.jam
+# dated          :=    01Dec03
+# version number :=
+# document ref.  :=    DEV000000
+# author         :=    Martin
+#
+# VERSION 4 software
+# Copyright (c) 1988,2002 Flomerics Limited . All rights reserved
+#script header ====================================================
+
+EXENAME = numanal ;
+
+LOCATE_TARGET ?= . ;
+
+# Setup platform Independant Flags
+CCFLAGS += $(FLOCFLAGS) ;
+
+# Set platform specific flags here
+switch $(OS)
+{
+  case NT :
+    CCFLAGS += /GX /GR  ;
+}
+
+#  Make C++ use the same Flags as C
+C++FLAGS += $(CCFLAGS) ;
+
+Files = 
+Bisection1.cpp
+Secant1.cpp
+FalsePos1.cpp
+Newton1.cpp
+Muller1.cpp
+Horner1.cpp
+Bairstow1.cpp
+Matrix1.cpp
+main.cpp
+;
+
+# Program source dependancies
+Main $(EXENAME) : $(Files) ;
+
+# Program Library dependancies
+LinkLibraries $(EXENAME) :
+;

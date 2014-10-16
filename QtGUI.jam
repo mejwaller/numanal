@@ -1,0 +1,122 @@
+#
+# VERSION 4 software
+# Copyright (c) 1988,2002 Flomerics Limited . All rights reserved
+#script header ====================================================
+
+LIBNAME = libQtGUI ;
+
+LOCATE_TARGET ?= $(DEVLIB) ;
+
+# Setup platform Independant Flags
+CCFLAGS += $(FLOCFLAGS) ;
+
+switch $(OS)
+{
+  case NT :
+    CCFLAGS += /GX /GR  ;
+}
+
+#  Make C++ use the same Flags as C
+C++FLAGS += $(CCFLAGS) ;
+
+
+
+LINKLIBS += $(QTLIBS) ;
+
+# Define where the headers are
+HDRS +=  $(flopcbsrc) $(DEVSRC) $(DEVINC) $(QTDIR)/include ;
+
+Files +=
+$(flopcbsrc)/QtGUI/flopcbguiwindow.cpp
+$(flopcbsrc)/QtGUI/ViewHandler.cpp
+$(flopcbsrc)/QtGUI/Model.cpp
+$(flopcbsrc)/QtGUI/View.cpp
+$(flopcbsrc)/QtGUI/Controller.cpp
+$(flopcbsrc)/QtGUI/MenuBarView.cpp
+$(flopcbsrc)/QtGUI/MenuBarController.cpp
+$(flopcbsrc)/QtGUI/moc_MenuBarController.cpp
+$(flopcbsrc)/QtGUI/IconBarView.cpp
+$(flopcbsrc)/QtGUI/IconBarController.cpp
+$(flopcbsrc)/QtGUI/IconBarWidget.cpp
+$(flopcbsrc)/QtGUI/moc_IconBarController.cpp
+$(flopcbsrc)/QtGUI/BoardPaletteView.cpp
+$(flopcbsrc)/QtGUI/BoardPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_BoardPaletteController.cpp
+$(flopcbsrc)/QtGUI/GUITreeView.cpp
+$(flopcbsrc)/QtGUI/GUITreeController.cpp
+$(flopcbsrc)/QtGUI/moc_GUITreeController.cpp
+$(flopcbsrc)/QtGUI/GUINode.cpp
+$(flopcbsrc)/QtGUI/SystemError.cpp
+$(flopcbsrc)/QtGUI/GUIErrorReporter.cpp
+$(flopcbsrc)/QtGUI/moc_flopcbguiwindow.cpp
+$(flopcbsrc)/QtGUI/GUITree.cpp
+$(flopcbsrc)/QtGUI/SolveController.cpp
+$(flopcbsrc)/QtGUI/moc_SolveController.cpp
+$(flopcbsrc)/QtGUI/SolverProgress.cpp
+$(flopcbsrc)/QtGUI/ResultsView.cpp
+$(flopcbsrc)/QtGUI/ResultsController.cpp
+$(flopcbsrc)/QtGUI/moc_ResultsController.cpp
+$(flopcbsrc)/QtGUI/SolveButEvent.cpp
+$(flopcbsrc)/QtGUI/SolverButton.cpp
+$(flopcbsrc)/QtGUI/SolverProgressBar.cpp
+$(flopcbsrc)/QtGUI/SolverRunningEvent.cpp
+$(flopcbsrc)/QtGUI/LibraryView.cpp
+$(flopcbsrc)/QtGUI/LibraryController.cpp
+$(flopcbsrc)/QtGUI/moc_LibraryController.cpp
+$(flopcbsrc)/QtGUI/SolutionProgressView.cpp
+$(flopcbsrc)/QtGUI/SolutionProgressController.cpp
+$(flopcbsrc)/QtGUI/moc_SolutionProgressController.cpp
+$(flopcbsrc)/QtGUI/ResultsTable.cpp
+$(flopcbsrc)/QtGUI/ResultsTableItem.cpp
+$(flopcbsrc)/QtGUI/ResultsComboTableItem.cpp
+$(flopcbsrc)/QtGUI/ComponentTableView.cpp
+$(flopcbsrc)/QtGUI/ComponentTableController.cpp
+$(flopcbsrc)/QtGUI/moc_ComponentTableController.cpp
+$(flopcbsrc)/QtGUI/ClickableLabel.cpp
+$(flopcbsrc)/QtGUI/moc_ClickableLabel.cpp
+$(flopcbsrc)/QtGUI/LayoutManager.cpp
+$(flopcbsrc)/QtGUI/SplashScreen.cpp
+$(flopcbsrc)/QtGUI/EnvLibraryView.cpp
+$(flopcbsrc)/QtGUI/EnvLibraryController.cpp
+$(flopcbsrc)/QtGUI/moc_EnvLibraryController.cpp
+$(flopcbsrc)/QtGUI/GUIPreferences.cpp
+$(flopcbsrc)/QtGUI/PopupView.cpp
+$(flopcbsrc)/QtGUI/PopupController.cpp
+$(flopcbsrc)/QtGUI/moc_PopupController.cpp
+$(flopcbsrc)/QtGUI/HelpLink.cpp
+$(flopcbsrc)/QtGUI/FlopcbPopup.cpp
+$(flopcbsrc)/QtGUI/WhatsThis.cpp
+$(flopcbsrc)/QtGUI/moc_WhatsThis.cpp
+$(flopcbsrc)/QtGUI/LibPopupView.cpp
+$(flopcbsrc)/QtGUI/LibPopupController.cpp
+$(flopcbsrc)/QtGUI/moc_LibPopupController.cpp
+$(flopcbsrc)/QtGUI/LayoutPaletteView.cpp
+$(flopcbsrc)/QtGUI/LayoutPaletteController.cpp
+$(flopcbsrc)/QtGUI/moc_LayoutPaletteController.cpp
+$(flopcbsrc)/QtGUI/BaseTree.cpp
+$(flopcbsrc)/QtGUI/moc_BaseTree.cpp
+$(flopcbsrc)/QtGUI/LayoutTreeView.cpp
+$(flopcbsrc)/QtGUI/LayoutTreeController.cpp
+$(flopcbsrc)/QtGUI/moc_LayoutTreeController.cpp
+$(flopcbsrc)/QtGUI/LayoutTree.cpp
+$(flopcbsrc)/QtGUI/ToolTips.cpp
+$(flopcbsrc)/QtGUI/ViewMenuDataItemVisitor.cpp
+$(flopcbsrc)/QtGUI/EnumPopup.cpp
+$(flopcbsrc)/QtGUI/moc_EnumPopup.cpp
+$(flopcbsrc)/QtGUI/BooleanAction.cpp
+$(flopcbsrc)/QtGUI/moc_BooleanAction.cpp
+$(flopcbsrc)/QtGUI/EnvTreeView.cpp
+$(flopcbsrc)/QtGUI/EnvTreeController.cpp
+$(flopcbsrc)/QtGUI/moc_EnvTreeController.cpp
+$(flopcbsrc)/QtGUI/EnvTree.cpp
+$(flopcbsrc)/QtGUI/MachineDetails.cpp
+$(flopcbsrc)/QtGUI/ImageGenerator.cpp
+$(flopcbsrc)/PCBModel/HTMLReportGenerator.cpp
+$(flopcbsrc)/QtGUI/Dialogs/SolveDialog.cpp
+$(flopcbsrc)/QtGUI/Dialogs/moc_SolveDialog.cpp
+$(flopcbsrc)/QtGUI/Dialogs/HTMLReportView.cpp
+$(flopcbsrc)/QtGUI/Dialogs/moc_HTMLReportView.cpp
+
+;
+
+TemplateLibrary $(LIBNAME)$(NLIBSUFFIX) : $(Files) ;
